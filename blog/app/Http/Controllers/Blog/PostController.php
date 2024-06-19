@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Blog;
 
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
+use App\Jobs\BlogPostAfterCreateJob;
+use App\Jobs\BlogPostAfterDeleteJob;
 
 class PostController extends BaseController
 {
