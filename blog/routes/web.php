@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RestTestController;
+use App\Http\Controllers\DiggingDeeperController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,7 +21,15 @@ Route::group($groupData, function () {
     $methods = ['index','edit','store','update','create',];
     Route::resource('categories', CategoryController::class)
         ->only($methods)
+
         ->names('blog.admin.categories');
+    Route::group(['prefix' => 'digging_deeper'], function () {
+
+        Route::get('collections', [DiggingDeeperController::class, 'collections'])
+
+            ->name('digging_deeper.collections');
+
+    });
     //BlogPost
     Route::resource('posts', PostController::class)
         ->except(['show'])                               //не робити маршрут для метода show
