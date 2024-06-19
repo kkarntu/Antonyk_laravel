@@ -12,9 +12,22 @@ class ProcessVideoJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    public function processVideo()
+    {
+        ProcessVideoJob::dispatch();
+        //Відстрочка виконання завдання. Не впливає на паузу.
+    }
+
     /**
-     * Create a new job instance.
+     * @link http://localhost:8000/digging_deeper/prepare-catalog
+     *
+     * php artisan queue:listen --queue=generate-catalog --tries=3 --delay=10
      */
+    public function prepareCatalog()
+    {
+        GenerateCatalogMainJob::dispatch();
+    }
+
     public function __construct()
     {
         //

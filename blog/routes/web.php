@@ -23,13 +23,12 @@ Route::group($groupData, function () {
         ->only($methods)
 
         ->names('blog.admin.categories');
-    Route::group(['prefix' => 'digging_deeper'], function () {
+    Route::get('process-video', 'DiggingDeeperController@processVideo')
+        ->name('digging_deeper.processVideo');
 
-        Route::get('collections', [DiggingDeeperController::class, 'collections'])
+    Route::get('prepare-catalog', 'DiggingDeeperController@prepareCatalog')
+        ->name('digging_deeper.prepareCatalog');
 
-            ->name('digging_deeper.collections');
-
-    });
     //BlogPost
     Route::resource('posts', PostController::class)
         ->except(['show'])                               //не робити маршрут для метода show
