@@ -16,10 +16,15 @@ $groupData = [
     'prefix' => 'admin/blog',
 ];
 Route::group($groupData, function () {
-    //BlogCategory
+    //BlogCategor
     $methods = ['index','edit','store','update','create',];
     Route::resource('categories', CategoryController::class)
         ->only($methods)
         ->names('blog.admin.categories');
+    //BlogPost
+    Route::resource('posts', PostController::class)
+        ->except(['show'])                               //не робити маршрут для метода show
+        ->names('blog.admin.posts');
 });
 Route::resource('rest', RestTestController::class)->names('restTest');
+
